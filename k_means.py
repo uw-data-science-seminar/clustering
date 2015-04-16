@@ -1,6 +1,5 @@
 import random, math
-
-# comment
+from matplotlib import pyplot as plt
 
 random_vector   = lambda n : [random.random() for i in range(n)]
 average         = lambda l : float(sum(l))/len(l)
@@ -20,6 +19,7 @@ def k_means(data,num_clusters,threshold = 0.1):
     d         = [[0 for j in range(num_clusters)] for i in range(n)]
     c         = [0 for i in range(n)]
     delta = threshold + 1
+
     while delta > threshold:
         # d[i][j] is the distance between the i-th data point and j-th centroid
         for i,i_ in enumerate(data):
@@ -32,7 +32,9 @@ def k_means(data,num_clusters,threshold = 0.1):
 
         new_centroids = []
         for k in range(len(centroids)):
-            new_centroids.append(average_vect([data[i] for i,j in enumerate(c) if j == k] ))
+            new_centroids.append(
+                average_vect([data[i] for i,j in enumerate(c) if j == k])
+            )
 
         delta = 0
         for a,b in zip(centroids,new_centroids):
@@ -44,37 +46,31 @@ def k_means(data,num_clusters,threshold = 0.1):
 
 
 def example1():
-    #data_ = [(1,2),(2,1),(1,1),(3,2),(4,2),(-1,-2),(-2,-2),(-1,-1),(-3,-1),(-2,-2)]
-    data_ = [(1,2),(-2,-2),(2,1),(-1,-1),(1,1),(-3,-1),(3,2),(-2,-2),(4,2),(-1,-2)]
+    data_ = [
+        (1,2), (-2,-2), (2,1), (-1,-1), (1,1), (-3,-1), (3,2), (-2,-2),
+        (4,2), (-1,-2)
+    ]
     result = k_means(data_,2)[0]
+
+    print 'k-means result:'
     print result
     for k in range(2):
+        print 'nodes with label k = %d'%k
         print [data_[i] for i,j in enumerate(result) if j == k]
-        
         result = k_means(data_,2)[0]
-
-#    print data_
 
     data_0 = [data_[i] for i,j in enumerate(result) if j == 0]
     data_1 = [data_[i] for i,j in enumerate(result) if j == 1]
-
-    for k in range(2):
-        print [data_[i] for i,j in enumerate(result) if j == k]
-
-    print len(data_)
 
     x0 = [data_0[j][0] for j in range(len(data_0))]
     y0 = [data_0[j][1] for j in range(len(data_0))]
     x1 = [data_1[j][0] for j in range(len(data_1))]
     y1 = [data_1[j][1] for j in range(len(data_1))]
 
-    print x0 
-    print y0
-    print x1
-    print y1
+    print '\nplotting...'
 
     plt.figure()
-    plt.plot(x0, y0,'b.', x1, y1, 'r.')
+    plt.plot(x0, y0, 'b.', x1, y1, 'r.', markersize=20)
     plt.axis([-5, 5, -5, 5])
     plt.show()
 
