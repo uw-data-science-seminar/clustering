@@ -42,9 +42,15 @@ def k_means(data,num_clusters,threshold = 0.1):
 
     return c,centroids
 
-#data_ = [(1,2),(2,1),(1,1),(3,2),(4,2),(-1,-2),(-2,-2),(-1,-1),(-3,-1),(-2,-2)]
-data_ = [(1,2),(-2,-2),(2,1),(-1,-1),(1,1),(-3,-1),(3,2),(-2,-2),(4,2),(-1,-2)]
-result = k_means(data_,2)[0]
-print result
-for k in range(2):
-    print [data_[i] for i,j in enumerate(result) if j == k]
+
+def example1():
+    #data_ = [(1,2),(2,1),(1,1),(3,2),(4,2),(-1,-2),(-2,-2),(-1,-1),(-3,-1),(-2,-2)]
+    data_ = [(1,2),(-2,-2),(2,1),(-1,-1),(1,1),(-3,-1),(3,2),(-2,-2),(4,2),(-1,-2)]
+    result = k_means(data_,2)[0]
+    print result
+    for k in range(2):
+        print [data_[i] for i,j in enumerate(result) if j == k]
+
+
+if __name__=='__main__':
+    example1()
