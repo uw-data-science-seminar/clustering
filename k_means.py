@@ -50,6 +50,33 @@ def example1():
     print result
     for k in range(2):
         print [data_[i] for i,j in enumerate(result) if j == k]
+        
+        result = k_means(data_,2)[0]
+
+#    print data_
+
+    data_0 = [data_[i] for i,j in enumerate(result) if j == 0]
+    data_1 = [data_[i] for i,j in enumerate(result) if j == 1]
+
+    for k in range(2):
+        print [data_[i] for i,j in enumerate(result) if j == k]
+
+    print len(data_)
+
+    x0 = [data_0[j][0] for j in range(len(data_0))]
+    y0 = [data_0[j][1] for j in range(len(data_0))]
+    x1 = [data_1[j][0] for j in range(len(data_1))]
+    y1 = [data_1[j][1] for j in range(len(data_1))]
+
+    print x0 
+    print y0
+    print x1
+    print y1
+
+    plt.figure()
+    plt.plot(x0, y0,'b.', x1, y1, 'r.')
+    plt.axis([-5, 5, -5, 5])
+    plt.show()
 
 
 if __name__=='__main__':
